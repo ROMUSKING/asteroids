@@ -16,11 +16,11 @@ class Player(circleshape.CircleShape):
         return [a, b, c]
     
     def draw(self, screen):
-        # sub-classes must override
+       
         pygame.draw.polygon(screen, PLAYER_COLOR, self.triangle(), PLAYER_LINE_WIDTH)
 
     def update(self, dt):
-        # sub-classes must override
+        
         
         keys = pygame.key.get_pressed()
 
@@ -32,6 +32,10 @@ class Player(circleshape.CircleShape):
             self.move(dt)
         if keys[pygame.K_s]:
             self.move(-dt)
+        if keys[pygame.K_q]:
+            self.slide(dt)
+        if keys[pygame.K_e]:
+            self.slide(-dt)
 
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
@@ -39,4 +43,9 @@ class Player(circleshape.CircleShape):
     def move(self, dt):
         
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
+        self.position += forward * PLAYER_SPEED * dt
+
+    def slide(self, dt):
+        
+        forward = pygame.Vector2(0, 1).rotate(self.rotation + 90)
         self.position += forward * PLAYER_SPEED * dt
