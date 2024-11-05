@@ -19,6 +19,7 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill(SCREEN_COLOR)
+        player.update(dt)
         player.draw(screen)
         pygame.display.flip()  # display update
         dt = clock.tick(FRAME_RATE) / 1000
